@@ -1,4 +1,4 @@
-# Expense Tracker by MANAV
+# Expense Tracker by Manav
 
 ## Problem Statement
 
@@ -6,26 +6,26 @@ Create a web-based personal finance tracker using JavaScript, HTML, and CSS. The
 
 ---
 
-## Overview
-
-The Expense Tracker by Skolers is a tool designed to effortlessly track and manage personal costs. Users can add transactions, keep track of earnings and expenditures, and gain insights into spending habits through graphical representations of monthly totals for costs and income.
-
----
 
 ## Features
 
 1. **Add Transactions:** Easily add income and expenses by providing details such as date, category, amount, and description.
 2. **Track Expenses:** Maintain a comprehensive record of expenses and income to understand spending habits.
-3. **Monthly Overview:** View a graphical breakdown of monthly total spending and income for better financial insights.
-4. **User-Friendly Interface:** The cost tracker features a simple, intuitive design for easy navigation and usage.
+3. **User-Friendly Interface:** The cost tracker features a simple, intuitive design for easy navigation and usage.
 
 ---
 
 ## Technologies Used
 
+- Flask
+  - Python 
 - HTML5
 - CSS3
+  - Bootstrap
 - JavaScript
+  - JQuery
+  - Popper js
+  - Chart js
 
 ---
 
@@ -34,23 +34,18 @@ The Expense Tracker by Skolers is a tool designed to effortlessly track and mana
 To run the Expense Tracker web application:
 
 1. Clone this repository.
+   ```bash
+   git clone https://github.com/Abie2023/Flask-App.git
+   ```
 2. Open the project directory in your preferred code editor.
-3. Launch the `index.html` file in your web browser.
+   - Open the terminal and run
+     ```bash
+     pip install Flask
+     ```
+3. Launch the web app in your web browser.
+   ```bash
+   python app.py
+   ```
 
 ---
 
-## Contributing
-
-We welcome contributions to enhance the functionality and usability of the Expense Tracker. Please fork the repository, make your changes, and submit a pull request for review.
-
----
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Contact
-
-For inquiries or feedback, please contact [Skolers](https://example.com/contact).
