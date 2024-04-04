@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Personal Finance Tracker - Cibil Score</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+	<link rel="shortcut icon" href="static/images/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar" class="active">
+            <h1>
+				<a href="{{ url_for('index') }}" class="logo">
+					<img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="img-fluid">
+				</a>
+			</h1>
+			<ul class="list-unstyled components mb-5">
+				<li class="{{ 'active' if request.path == url_for('index') else '' }}">
+					<a href="{{ url_for('index') }}"><span class="fa fa-home"></span> Dashboard</a>
+				</li>
+				<li class="{{ 'active' if request.path == url_for('transaction') else '' }}">
+					<a href="{{ url_for('transaction') }}"><span class="fa fa-plus-square"></span> Add transactions</a>
+				</li>
+				<li class="{{ 'active' if request.path == url_for('history') else '' }}">
+					<a href="{{ url_for('history') }}"><span class="fa fa-sticky-note"></span> Transaction history</a>
+				</li>
+				<li class="{{ 'active' if request.path == url_for('credit') else '' }}">
+					<a href="{{ url_for('credit') }}"><span class="fa fa-credit-card"></span> CIBIL Score</a>
+				</li>
+				<li class="{{ 'active' if request.path == url_for('extra') else '' }}">
+					<a href="{{ url_for('extra') }}"><span class="fa fa-money"></span> Other Expenses & Income</a>
+				</li>
+			</ul>
+            <div class="footer">
+                <p>
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | Manav 2023
+                </p>
+            </div>
+        </nav>
+         <!-- Page Content  -->
+         <div id="content" class="p-4 p-md-5">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#" id="greeting">
+                                    Hello, User
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIBIL Score</title>
+    <style>
+        /* Add your CSS styles here */
+        .cibil-score-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        #cibilScore {
+            font-size: 24px;
+            font-weight: bold;
+            color: #15c0de;
+        }
+        #refreshCIBILScoreButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #10b08b;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #refreshCIBILScoreButton:hover {
+            background-color: #2f12a1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cibil-score-container">
+    <h1>CIBIL Score </h1>
+    <div>
+        <p>Your current CIBIL score:</p>
+        <p id="cibilScore">Loading...</p>
+    </div>
+    <button id="refreshCIBILScoreButton">Refresh Score</button>
+</div>
+</body>
+</html>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function render() {
+            var transactions = JSON.parse(localStorage.getItem("transactions"));
+            var table = document.getElementById("911");
+
+            transactions.forEach(function (transaction) {
+                var createtr = document.createElement("tr");
+
+                var createtd = document.createElement("td");
+                var createtd2 = document.createElement("td"); 
+                var createtd3 = document.createElement("td");
+                var createtd4 = document.createElement("td");
+
+                var createp = document.createElement("td");
+                var createp2 = document.createElement("td");
+                var createp3 = document.createElement("td");
+                var createp4 = document.createElement("td");
+
+                createtd.appendChild(createp);
+                createtd2.appendChild(createp2);
+                createtd3.appendChild(createp3);
+                createtd4.appendChild(createp4);
+
+                createp.innerHTML = transaction.name;
+                createp2.innerHTML = transaction.date;
+                createp3.innerHTML = '&#8377;  ' + transaction.amount;
+
+
+                if (transaction.type == "expense") {
+                    createp4.innerHTML = '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="8" fill="#DB2719" fill-opacity="0.3"/><circle cx="8" cy="8" r="4" fill="#DB2719"/></svg>' + transaction.type;
+                }
+                else {
+                    createp4.innerHTML = '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="8" fill="#DBA32A" fill-opacity="0.14"/><circle cx="8" cy="8" r="4" fill="#7FB519"/></svg>' + transaction.type;
+                }
+                createtd.appendChild(createp);
+                createtd2.appendChild(createp2);
+                createtd3.appendChild(createp3);
+                createtd4.appendChild(createp4);
+
+                createtr.appendChild(createtd);
+                createtr.appendChild(createtd2);
+                createtr.appendChild(createtd3);
+                createtr.appendChild(createtd4);
+
+                table.appendChild(createtr);
+            });
+        }
+        render();
+    </script>
+    <script>
+        var name = localStorage.getItem("name");
+        if (name != null) {
+            document.getElementById("greeting").innerHTML = "Hello, " + name;
+        }
+    </script>
+</body>
+
+</html>
