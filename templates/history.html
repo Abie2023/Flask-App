@@ -121,66 +121,76 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popper.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
-    <script>
-      function render() {
-        var transactions = JSON.parse(localStorage.getItem("transactions"));
-        var table = document.getElementById("911");
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.all.min.js"></script>
 
-        transactions.forEach(function (transaction) {
-          var createtr = document.createElement("tr");
+<script>
+  fetch('../data/transaction-history.json')
+    .then(response => response.json())
+    .then(data => {
+      render(data); // Pass the data received from the fetch request to the render function
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 
-          var createtd = document.createElement("td");
-          var createtd2 = document.createElement("td"); // Fixed variable name
-          var createtd3 = document.createElement("td");
-          var createtd4 = document.createElement("td");
+  function render(transactions) { // Define transactions as a parameter
+    var table = document.getElementById("911");
 
-          var createp = document.createElement("td");
-          var createp2 = document.createElement("td");
-          var createp3 = document.createElement("td");
-          var createp4 = document.createElement("td");
+    if (transactions) {
+      transactions.forEach(function (transaction) {
+        var createtr = document.createElement("tr");
 
-          createtd.appendChild(createp);
-          createtd2.appendChild(createp2);
-          createtd3.appendChild(createp3);
-          createtd4.appendChild(createp4);
+        var createtd = document.createElement("td");
+        var createtd2 = document.createElement("td"); // Fixed variable name
+        var createtd3 = document.createElement("td");
+        var createtd4 = document.createElement("td");
 
-          createp.innerHTML = transaction.name;
-          createp2.innerHTML = transaction.date;
-          createp3.innerHTML = "&#8377;  " + transaction.amount;
+        var createp = document.createElement("td");
+        var createp2 = document.createElement("td");
+        var createp3 = document.createElement("td");
+        var createp4 = document.createElement("td");
 
-          if (transaction.type == "expense") {
-            createp4.innerHTML =
-              '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DB2719" fill-opacity="0.3"/><circle cx="8" cy="8" r="4" fill="#DB2719"/></svg>' +
-              transaction.type;
-          } else {
-            createp4.innerHTML =
-              '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DBA32A" fill-opacity="0.14"/><circle cx="8" cy="8" r="4" fill="#7FB519"/></svg>' +
-              transaction.type;
-          }
-          createtd.appendChild(createp);
-          createtd2.appendChild(createp2);
-          createtd3.appendChild(createp3);
-          createtd4.appendChild(createp4);
+        createtd.appendChild(createp);
+        createtd2.appendChild(createp2);
+        createtd3.appendChild(createp3);
+        createtd4.appendChild(createp4);
 
-          createtr.appendChild(createtd);
-          createtr.appendChild(createtd2);
-          createtr.appendChild(createtd3);
-          createtr.appendChild(createtd4);
+        createp.innerHTML = transaction.name;
+        createp2.innerHTML = transaction.date;
+        createp3.innerHTML = "&#8377;  " + transaction.amount;
 
-          table.appendChild(createtr);
-        });
-      }
-      render();
-    </script>
+        if (transaction.type == "expense") {
+          createp4.innerHTML =
+            '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DB2719" fill-opacity="0.3"/><circle cx="8" cy="8" r="4" fill="#DB2719"/></svg>' +
+            transaction.type;
+        } else {
+          createp4.innerHTML =
+            '<svg class="status" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="16" height="16" rx="8" fill="#DBA32A" fill-opacity="0.14"/><circle cx="8" cy="8" r="4" fill="#7FB519"/></svg>' +
+            transaction.type;
+        }
+        createtd.appendChild(createp);
+        createtd2.appendChild(createp2);
+        createtd3.appendChild(createp3);
+        createtd4.appendChild(createp4);
+
+        createtr.appendChild(createtd);
+        createtr.appendChild(createtd2);
+        createtr.appendChild(createtd3);
+        createtr.appendChild(createtd4);
+
+        table.appendChild(createtr);
+      });
+    }
+  }
+</script>
     <script>
       var name = localStorage.getItem("name");
       if (name != null) {
